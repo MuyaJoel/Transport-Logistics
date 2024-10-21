@@ -24,16 +24,18 @@ model Slot {
   id        Int       @id @default(autoincrement())
   number    Int
   isOccupied Boolean   @default(false)
+  reservation Reservation[]
   mall      Mall       @relation(fields: [mallId], references: [id])
   mallId    Int
-  reservation Reservation?
+  
 }
 
 model Reservation {
   id          Int      @id @default(autoincrement())
   numberPlate String
   timeIn      DateTime
-  timeOut     DateTime
+  timeOut     DateTime?
+  amount      Float 
   slot        Slot     @relation(fields: [slotId], references: [id])
   slotId      Int @unique
 }
